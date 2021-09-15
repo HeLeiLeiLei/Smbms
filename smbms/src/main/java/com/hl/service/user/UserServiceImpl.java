@@ -32,10 +32,19 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-//    @Test
-//    public void test(){
-//        UserServiceImpl userService = new UserServiceImpl();
-//        User user=userService.Login("admin","123456asdasd");
-//        System.out.println(user.getUserPassword());
-//    }
+    public int updateUserPassword(String newPasswrod,int id) {
+        Connection connection=null;
+        int num=0;
+        try {
+            connection= BaseDao.getConnection();
+            num=userDao.udpdateUserPassword(connection,newPasswrod,id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            BaseDao.closeResource(connection,null,null);
+        }
+        return num;
+    }
+
+
 }

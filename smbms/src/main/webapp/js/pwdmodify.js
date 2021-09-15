@@ -1,4 +1,4 @@
-var oldpassword = null;
+﻿var oldpassword = null;
 var newpassword = null;
 var rnewpassword = null;
 var saveBtn = null;
@@ -16,8 +16,8 @@ $(function(){
 	oldpassword.on("blur",function(){
 		$.ajax({
 			type:"GET",
-			url:path+"/user/check",
-			data:{oldpassword:oldpassword.val()},
+			url:path+"/sys/updatePassword",
+			data:{method:"pwdmodify",oldpassword:oldpassword.val()},
 				success:function(data){
 				if(data.result == "true"){//旧密码正确
 					validateTip(oldpassword.next(),{"color":"green"},imgYes,true);
@@ -50,8 +50,7 @@ $(function(){
 			validateTip(newpassword.next(),{"color":"red"},imgNo + " 密码输入不符合规范，请重新输入",false);
 		}
 	});
-	
-	
+
 	rnewpassword.on("focus",function(){
 		validateTip(rnewpassword.next(),{"color":"#666666"},"* 请输入与上面一致的密码",false);
 	}).on("blur",function(){
@@ -62,21 +61,15 @@ $(function(){
 			validateTip(rnewpassword.next(),{"color":"red"},imgNo + " 两次密码输入不一致，请重新输入",false);
 		}
 	});
-	
-	
+
 	saveBtn.on("click",function(){
 		oldpassword.blur();
 		newpassword.blur();
 		rnewpassword.blur();
-		// oldpassword.attr("validateStatus") == "true"
-		// &&
-		if( oldpassword.attr("validateStatus") == "true"
-			&&newpassword.attr("validateStatus") == "true"
-			&& rnewpassword.attr("validateStatus") == "true"){
+		if(oldpassword.attr("validateStatus") == "true" &&newpassword.attr("validateStatus") == "true" && rnewpassword.attr("validateStatus") == "true"){
 			if(confirm("确定要修改密码？")){
 				$("#userForm").submit();
 			}
 		}
-		
 	});
 });

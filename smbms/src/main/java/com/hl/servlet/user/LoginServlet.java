@@ -20,7 +20,7 @@ public class LoginServlet extends HttpServlet {
         //和数据库中的密码进行对比,调用业务层：
         UserService userService = new UserServiceImpl();
         User user = userService.Login(userCode, userPassword);
-        if(user != null){
+        if(user != null && userCode.equals(user.getUserCode()) && userPassword.equals(user.getUserPassword())){
             //将用户的信息放在Session中
             req.getSession().setAttribute(Constants.USER_SESSION,user);
             //跳转主页

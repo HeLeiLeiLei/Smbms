@@ -43,4 +43,20 @@ public class UserDaoImpl implements UserDao{
         }
         return user;
     }
+
+    public int udpdateUserPassword(Connection connection,String userPassword,int id) {
+        int num=0;
+        if(connection != null){
+            String sql="update smbms_user set userPassword=? where id=?";
+            Object[] params={userPassword,id};
+            try {
+                num=BaseDao.executU(connection,pstm,params,sql);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                BaseDao.closeResource(null,pstm,null);
+            }
+        }
+        return num;
+    }
 }

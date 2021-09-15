@@ -54,6 +54,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -83,7 +84,7 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/js" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -94,6 +95,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\smbms\src\main\webapp\js" />
       <recent name="E:\smbms\src\main\webapp" />
       <recent name="E:\smbms\src\main\java\com\hl\pojo" />
     </key>
@@ -110,7 +112,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.UserServiceImpl.test">
+  <component name="RunManager" selected="Tomcat Server.Tomcat 9">
     <configuration name="BaseDao.getConnection" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="smbms" />
       <extension name="coverage">
@@ -122,6 +124,22 @@
       <option name="PACKAGE_NAME" value="com.hl.dao" />
       <option name="MAIN_CLASS_NAME" value="com.hl.dao.BaseDao" />
       <option name="METHOD_NAME" value="getConnection" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceImpl.Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="smbms" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.hl.service.user.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.hl.service.user" />
+      <option name="MAIN_CLASS_NAME" value="com.hl.service.user.UserServiceImpl" />
+      <option name="METHOD_NAME" value="Test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -143,7 +161,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UserServiceImpl.updateUserPassword" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="smbms" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.hl.service.user.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.hl.service.user" />
+      <option name="MAIN_CLASS_NAME" value="com.hl.service.user.UserServiceImpl" />
+      <option name="METHOD_NAME" value="updateUserPassword" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Tomcat 9" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.22" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="smbms:war">
@@ -215,8 +250,17 @@
         </option>
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JUnit.BaseDao.getConnection" />
+      <item itemvalue="JUnit.UserServiceImpl.Test" />
+      <item itemvalue="JUnit.UserServiceImpl.test" />
+      <item itemvalue="JUnit.UserServiceImpl.updateUserPassword" />
+      <item itemvalue="Tomcat Server.Tomcat 9" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UserServiceImpl.Test" />
+        <item itemvalue="JUnit.UserServiceImpl.updateUserPassword" />
         <item itemvalue="JUnit.UserServiceImpl.test" />
         <item itemvalue="JUnit.BaseDao.getConnection" />
       </list>
@@ -226,12 +270,7 @@
     <option name="allServicesViewState">
       <serviceView>
         <treeState>
-          <expand>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@5295b35b" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-            </path>
-          </expand>
+          <expand />
           <select />
         </treeState>
       </serviceView>
@@ -249,6 +288,8 @@
       <updated>1631593186033</updated>
       <workItem from="1631593189371" duration="2045000" />
       <workItem from="1631597130301" duration="13077000" />
+      <workItem from="1631621789212" duration="9220000" />
+      <workItem from="1631664384363" duration="26354000" />
     </task>
     <servers />
   </component>
