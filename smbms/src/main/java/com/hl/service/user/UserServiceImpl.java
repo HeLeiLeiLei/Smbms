@@ -7,6 +7,7 @@ import com.hl.pojo.User;
 import org.junit.Test;
 
 import java.sql.Connection;
+import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
@@ -46,5 +47,36 @@ public class UserServiceImpl implements UserService {
         return num;
     }
 
+    public List<User> getUserList(String querUserName,
+                                  int querUserRole,
+                                  int currentPageNo,
+                                  int pageSize) {
+        Connection connection=null;
+        List<User> userList=null;
+        try{
+            connection=BaseDao.getConnection();
+            userList = userDao.getUserList(connection, querUserName, querUserRole, currentPageNo, pageSize);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            BaseDao.closeResource(connection,null,null);
+        }
+        return userList;
+    }
+
+
+    public int getUserCount(String userName, int userRole) {
+        Connection connection=null;
+        int userCount=0;
+        try {
+            connection=BaseDao.getConnection();
+            userCount = userDao.getUserCount(connection, userName, userRole);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            BaseDao.closeResource(connection,null,null);
+        }
+        return userCount;
+    }
 
 }

@@ -23,6 +23,14 @@
         <filter-name>sysFilter</filter-name>
         <url-pattern>/jsp/*</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>sysFilter2</filter-name>
+        <filter-class>com.hl.filter.sysFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>sysFilter2</filter-name>
+        <url-pattern>/sys/*</url-pattern>
+    </filter-mapping>
 
     <!--设置欢迎页面-->
     <welcome-file-list>
@@ -52,7 +60,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/sys/updatePassword</url-pattern>
+        <url-pattern>/sys/userDao.dao</url-pattern>
     </servlet-mapping>
 
 

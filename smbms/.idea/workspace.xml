@@ -45,7 +45,7 @@
         <item name="smbms@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="smbms: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="smbms_user: table" type="285a2a93:MysqlImplModel$Table" />
+        <item name="smbms_role: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -53,8 +53,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -84,17 +84,19 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/hl/util" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="configurable.group.build.tools" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\smbms\src\main\java\com\hl\util" />
       <recent name="E:\smbms\src\main\webapp\js" />
       <recent name="E:\smbms\src\main\webapp" />
       <recent name="E:\smbms\src\main\java\com\hl\pojo" />
@@ -113,17 +115,33 @@
     </option>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 9">
-    <configuration name="BaseDao.getConnection" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RoleServiceImpl.Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="smbms" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.hl.dao.*" />
+          <option name="PATTERN" value="com.hl.service.role.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.hl.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.hl.dao.BaseDao" />
-      <option name="METHOD_NAME" value="getConnection" />
+      <option name="PACKAGE_NAME" value="com.hl.service.role" />
+      <option name="MAIN_CLASS_NAME" value="com.hl.service.role.RoleServiceImpl" />
+      <option name="METHOD_NAME" value="Test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RoleServiceImpl.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="smbms" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.hl.service.role.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.hl.service.role" />
+      <option name="MAIN_CLASS_NAME" value="com.hl.service.role.RoleServiceImpl" />
+      <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -251,18 +269,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.BaseDao.getConnection" />
       <item itemvalue="JUnit.UserServiceImpl.Test" />
       <item itemvalue="JUnit.UserServiceImpl.test" />
       <item itemvalue="JUnit.UserServiceImpl.updateUserPassword" />
+      <item itemvalue="JUnit.RoleServiceImpl.Test" />
+      <item itemvalue="JUnit.RoleServiceImpl.test" />
       <item itemvalue="Tomcat Server.Tomcat 9" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.UserServiceImpl.Test" />
+        <item itemvalue="JUnit.RoleServiceImpl.test" />
+        <item itemvalue="JUnit.RoleServiceImpl.Test" />
         <item itemvalue="JUnit.UserServiceImpl.updateUserPassword" />
         <item itemvalue="JUnit.UserServiceImpl.test" />
-        <item itemvalue="JUnit.BaseDao.getConnection" />
       </list>
     </recent_temporary>
   </component>
@@ -290,6 +310,10 @@
       <workItem from="1631597130301" duration="13077000" />
       <workItem from="1631621789212" duration="9220000" />
       <workItem from="1631664384363" duration="26354000" />
+      <workItem from="1631708294753" duration="857000" />
+      <workItem from="1631709425020" duration="5675000" />
+      <workItem from="1631752699026" duration="12966000" />
+      <workItem from="1631777976921" duration="10950000" />
     </task>
     <servers />
   </component>

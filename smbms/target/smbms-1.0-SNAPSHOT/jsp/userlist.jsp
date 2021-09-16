@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/jsp/common/head.jsp"%>
+<%@include file="/jsp/common/head.jsp"%>
         <div class="right">
             <div class="location">
                 <strong>你现在所在的位置是:</strong>
                 <span>用户管理页面</span>
             </div>
             <div class="search">
-           		<form method="get" action="${pageContext.request.contextPath }/user/query">
+           		<form method="get" action="${pageContext.request.contextPath }/sys/userDao.dao">
 					<input name="method" value="query" class="input-text" type="hidden">
 					 <span>用户名：</span>
-					 <input name="queryname" class="input-text"	type="text" value="${queryUserName }">
+					 <input name="queryname" class="input-text"	type="text" value="${queryUserName}">
 					 
 					 <span>用户角色：</span>
 					 <select name="queryUserRole">
@@ -25,7 +25,7 @@
 					 
 					 <input type="hidden" name="pageIndex" value="1"/>
 					 <input	value="查 询" type="submit" id="searchbutton">
-					 <a href="${pageContext.request.contextPath}/user/add.do" >添加用户</a>
+					 <a href="${pageContext.request.contextPath}/jsp/useradd.jsp" >添加用户</a>
 				</form>
             </div>
             <!--用户-->
@@ -54,7 +54,7 @@
 							</span>
 						</td>
 						<td>
-						<span>${user.userPassword}</span>
+						<span>${user.birthday}</span>
 						</td>
 						<td>
 						<span>${user.phone}</span>
@@ -92,5 +92,5 @@
     </div>
 </div>
 
-<%@include file="/WEB-INF/jsp/common/foot.jsp" %>
+<%@include file="/jsp/common/foot.jsp" %>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/userlist.js"></script>

@@ -2,10 +2,13 @@ package com.hl.dao.user;
 
 import com.hl.dao.BaseDao;
 import com.hl.pojo.User;
+import com.mysql.jdbc.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDaoImpl implements UserDao{
 
@@ -55,8 +58,83 @@ public class UserDaoImpl implements UserDao{
                 e.printStackTrace();
             }finally {
                 BaseDao.closeResource(null,pstm,null);
+
             }
         }
         return num;
+    }
+
+    public int getUserCount(Connection connection, String userName, int userRole) {
+        int count=0;
+        if(connection != null){
+            StringBuffer sql=new StringBuffer();
+            ArrayList<Object> list = new ArrayList<Object>();
+            sql.append("select count(1) as count from smbms_user u,smbms_role r where u.userRole=r.id");
+
+            if(userName != null && userName.length()>0){
+                sql.append(" and u.userName like ?");
+                list.add("%"+userName+"%");
+            }
+            if(userRole > 0){
+                sql.append(" and u.userRole=?");
+                list.add(userRole);
+            }
+            //怎么把list转换为数组
+            Object[] array = list.toArray();
+            try {
+                rs = BaseDao.executQ(connection, pstm, rs, array, sql.toString());
+                if(rs.next()){
+                    count = rs.getInt("count");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                BaseDao.closeResource(null,pstm,rs);
+            }
+        }
+        return count;
+    }
+
+    public List<User> getUserList(Connection connection, String userName, int userRole, int currentPageNo, int pageSize) {
+        ArrayList<Object> list = new ArrayList<Object>();
+        List<User> userList=new ArrayList<User>();
+        if(connection != null){
+            StringBuffer sql=new StringBuffer();
+            sql.append("select u.*,r.roleName as userRoleName from smbms_user u,smbms_role r where u.userRole = r.id");
+            if(!StringUtils.isNullOrEmpty(userName)){
+                sql.append(" and u.userName like ?");
+                list.add("%"+userName+"%");
+            }
+            if(userRole > 0){
+                sql.append(" and u.userRole=?");
+                list.add(userRole);
+            }
+            sql.append(" order by id asc  limit ?,?");
+            currentPageNo=(currentPageNo-1)*pageSize;
+            list.add(currentPageNo);
+            list.add(pageSize);
+
+            Object[] array = list.toArray();
+            try{
+                rs = BaseDao.executQ(connection, pstm, rs, array, sql.toString());
+                while (rs.next()){
+                    User user = new User();
+                    user.setUserCode(rs.getString("userCode"));
+                    user.setUserName(rs.getString("userName"));
+                    user.setGender(rs.getInt("gender"));
+                    user.setBirthday(rs.getDate("birthday"));
+                    user.setPhone(rs.getString("phone"));
+                    user.setUserRoleName(rs.getString("userRoleName"));
+                    userList.add(user);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                BaseDao.closeResource(null,pstm,rs);
+            }
+        }
+
+
+        return userList;
     }
 }

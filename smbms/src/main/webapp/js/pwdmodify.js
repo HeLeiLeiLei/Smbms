@@ -16,7 +16,7 @@ $(function(){
 	oldpassword.on("blur",function(){
 		$.ajax({
 			type:"GET",
-			url:path+"/sys/updatePassword",
+			url:path+"/sys/userDao.dao",
 			data:{method:"pwdmodify",oldpassword:oldpassword.val()},
 				success:function(data){
 				if(data.result == "true"){//旧密码正确
