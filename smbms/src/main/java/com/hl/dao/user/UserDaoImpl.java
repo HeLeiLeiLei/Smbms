@@ -5,9 +5,12 @@ import com.hl.pojo.User;
 import com.mysql.jdbc.StringUtils;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao{
@@ -136,5 +139,10 @@ public class UserDaoImpl implements UserDao{
 
 
         return userList;
+    }
+
+    public int addUser(Connection connection,User user){
+        String sql="insert into smbms_user(?,?,?,?,?,?,?,?,?) values(?,?,?,?,?,?,?,?,?)";
+        return 0;
     }
 }

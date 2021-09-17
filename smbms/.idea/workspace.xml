@@ -84,7 +84,7 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/hl/util" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/js" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -96,8 +96,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\smbms\src\main\java\com\hl\util" />
       <recent name="E:\smbms\src\main\webapp\js" />
+      <recent name="E:\smbms\src\main\java\com\hl\util" />
       <recent name="E:\smbms\src\main\webapp" />
       <recent name="E:\smbms\src\main\java\com\hl\pojo" />
     </key>
@@ -314,6 +314,8 @@
       <workItem from="1631709425020" duration="5675000" />
       <workItem from="1631752699026" duration="12966000" />
       <workItem from="1631777976921" duration="10950000" />
+      <workItem from="1631848256531" duration="1723000" />
+      <workItem from="1631885862141" duration="2616000" />
     </task>
     <servers />
   </component>

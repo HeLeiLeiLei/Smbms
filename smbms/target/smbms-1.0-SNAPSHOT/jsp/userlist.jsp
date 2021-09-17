@@ -54,7 +54,7 @@
 							</span>
 						</td>
 						<td>
-						<span>${user.birthday}</span>
+						<span>${user.age}</span>
 						</td>
 						<td>
 						<span>${user.phone}</span>

@@ -58,6 +58,14 @@
                     <label >用户角色：</label>
                     <!-- 列出所有的角色分类 -->
 					<select name="userRole" id="userRole"></select>
+                        <c:if test="${roleList != null }">
+                            <option value="0">--请选择--</option>
+                            <c:forEach var="role" items="${roleList}">
+                                <option <c:if test="${role.id == queryUserRole }">selected="selected"</c:if>
+                                        value="${role.id}">${role.roleName}</option>
+                            </c:forEach>
+                        </c:if>
+                    </select>
 	        		<font color="red"></font>
                 </div>
                 <div class="providerAddBtn">

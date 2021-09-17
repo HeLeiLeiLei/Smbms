@@ -1,4 +1,4 @@
-﻿var proCode = null;
+var proCode = null;
 var proName = null;
 var proContact = null;
 var proPhone = null;

@@ -1,4 +1,4 @@
-﻿var path = $("#path").val();
+var path = $("#path").val();
 var imgYes = "<img width='15px' src='"+path+"/images/y.png' />";
 var imgNo = "<img width='15px' src='"+path+"/images/n.png' />";
 /**
