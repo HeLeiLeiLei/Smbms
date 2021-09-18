@@ -4,13 +4,11 @@ import com.hl.dao.BaseDao;
 import com.hl.dao.user.UserDao;
 import com.hl.dao.user.UserDaoImpl;
 import com.hl.pojo.User;
-import com.hl.util.Constants;
 import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
@@ -135,4 +133,36 @@ public class UserServiceImpl implements UserService {
         }
         return num;
     }
+
+    public int updateUser(User user) throws SQLException {
+        Connection connection=null;
+        int num=0;
+        try{
+            connection=BaseDao.getConnection();
+            connection.setAutoCommit(false);
+            num=userDao.updateUser(connection,user);
+            connection.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            connection.rollback();
+        }finally {
+            BaseDao.closeResource(connection,null,null);
+        }
+        return num;
+    }
+
+    public User showUser(String userCode) {
+        Connection connection=null;
+        User user=new User();
+        try {
+            connection = BaseDao.getConnection();
+            user = userDao.showUser(connection, userCode);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            BaseDao.closeResource(connection,null,null);
+        }
+        return user;
+    }
+
 }

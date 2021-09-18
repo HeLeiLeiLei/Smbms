@@ -30,4 +30,10 @@ public interface UserDao {
 
     //删除用户
     public int deleteUser(Connection connection,int userId);
+
+    //修改用户信息
+    public int updateUser(Connection connection,User user);
+
+    //显示用户信息
+    public User showUser(Connection connection,String userCode);
 }

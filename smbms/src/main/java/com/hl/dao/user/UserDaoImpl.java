@@ -203,4 +203,55 @@ public class UserDaoImpl implements UserDao{
         }
         return num;
     }
+
+    public int updateUser(Connection connection, User user) {
+        String sql="update smbms_user set userName=?,gender=?,birthday=?," +
+                "phone=?,address=?,userRole=? where id=?";
+        int num=0;
+        ArrayList<Object> arrayList = new ArrayList<Object>();
+        arrayList.add(user.getUserName());
+        arrayList.add(user.getGender());
+        arrayList.add(user.getBirthday());
+        arrayList.add(user.getPhone());
+        arrayList.add(user.getAddress());
+        arrayList.add(user.getUserRole());
+        arrayList.add(user.getId());
+        Object[] pamars = arrayList.toArray();
+        if(connection != null){
+            try {
+                num=BaseDao.executU(connection,pstm,pamars,sql);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                BaseDao.closeResource(null,pstm,null);
+            }
+        }
+        return num;
+    }
+
+    public User showUser(Connection connection,String userCode){
+        String sql="select * from smbms_user where userCode=?";
+        Object pamars[]={userCode};
+        User user=new User();
+        if(connection != null){
+            try{
+                rs = BaseDao.executQ(connection, pstm, rs, pamars, sql);
+                while (rs.next()){
+                    user.setId(rs.getInt("id"));
+                    user.setUserName(rs.getString("userName"));
+                    user.setGender(rs.getInt("gender"));
+                    user.setBirthday(rs.getDate("birthday"));
+                    user.setPhone(rs.getString("phone"));
+                    user.setAddress(rs.getString("address"));
+                    user.setUserRole(rs.getInt("userRole"));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                BaseDao.closeResource(null,pstm,rs);
+            }
+        }
+
+        return user;
+    }
 }

@@ -26,4 +26,10 @@ public interface UserService {
 
     //删除用户
     public int deleteUser(int userId) throws SQLException;
+
+    //修改用户
+    public int updateUser(User user) throws SQLException;
+
+    //显示用户数据
+    public User showUser(String userCode);
 }

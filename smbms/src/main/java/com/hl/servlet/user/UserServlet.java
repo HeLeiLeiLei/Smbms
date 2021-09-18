@@ -43,8 +43,11 @@ public class UserServlet extends HttpServlet {
             this.addUser(req,resp);
         }else if(req.getParameter("method") != null && req.getParameter("method").equals("deleteUser")){
             this.deleteUser(req,resp);
+        }else if(req.getParameter("method") != null && req.getParameter("method").equals("updateUser")){
+            this.updateUser(req,resp);
+        }else if(req.getParameter("method") != null && req.getParameter("method").equals("modify")){
+            this.showUser(req,resp);
         }
-
     }
 
     @Override
@@ -107,7 +110,7 @@ public class UserServlet extends HttpServlet {
     }
 
 
-    //查询用户信息
+    //查询所有用户信息
     public void query(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(req.getSession().getAttribute(Constants.USER_SESSION) != null){
             //获取前端页面参数
@@ -261,4 +264,56 @@ public class UserServlet extends HttpServlet {
         }
     }
 
+    //修改用户数据
+    public void updateUser(HttpServletRequest req, HttpServletResponse resp){
+        String uid = req.getParameter("uid");
+        String userName = req.getParameter("userName");
+        String gender = req.getParameter("gender");
+        String birthday = req.getParameter("birthday");
+        String phone = req.getParameter("phone");
+        String address = req.getParameter("address");
+        String userRole = req.getParameter("userRole");
+
+        User user=new User();
+        user.setId(Integer.parseInt(uid));
+        user.setUserName(userName);
+        user.setGender(Integer.parseInt(gender));
+        try {
+            user.setBirthday(new SimpleDateFormat("yyyy-MM-dd").parse(birthday));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        user.setPhone(phone);
+        user.setAddress(address);
+        user.setUserRole(Integer.parseInt(userRole));
+
+        UserService userService=new UserServiceImpl();
+        try{
+           int num= userService.updateUser(user);
+           if(num > 0){
+               resp.sendRedirect(req.getContextPath()+"/sys/userDao.dao?method=query");
+           }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //展示用户信息
+    public void showUser(HttpServletRequest req, HttpServletResponse resp){
+        String userCode = req.getParameter("uid");
+        if(userCode != null && userCode.length()>0){
+            UserService userService=new UserServiceImpl();
+            User user = userService.showUser(userCode);
+            try {
+                req.setAttribute("user",user);
+                req.getRequestDispatcher("/jsp/usermodify.jsp").forward(req,resp);
+            } catch (ServletException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
