@@ -22,6 +22,9 @@ public interface UserDao {
     //根据用户名或者角色查询用户数量
     public int getUserCount(Connection connection,String userName,int userRole);
 
+    //根据用户编码查询userList
+    public int findUserbyUserCode(Connection connection,String userCode);
+
     //添加用户
     public int addUser(Connection connection,User user);
 }

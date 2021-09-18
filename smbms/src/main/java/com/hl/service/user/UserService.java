@@ -2,6 +2,7 @@ package com.hl.service.user;
 
 import com.hl.pojo.User;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface UserService {
@@ -16,4 +17,10 @@ public interface UserService {
                                   int pageSize);
     //查询记录数
     public int getUserCount(String userName,int userRole);
+
+    //查询userCode 是否重名
+    public int findUserbyUserCode(String userCode);
+
+    //添加用户
+    public int addUser(User user) throws SQLException;
 }

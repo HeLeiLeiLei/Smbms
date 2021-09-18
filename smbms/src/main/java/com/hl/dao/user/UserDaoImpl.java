@@ -5,12 +5,9 @@ import com.hl.pojo.User;
 import com.mysql.jdbc.StringUtils;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao{
@@ -141,8 +138,52 @@ public class UserDaoImpl implements UserDao{
         return userList;
     }
 
-    public int addUser(Connection connection,User user){
-        String sql="insert into smbms_user(?,?,?,?,?,?,?,?,?) values(?,?,?,?,?,?,?,?,?)";
-        return 0;
+    public int findUserbyUserCode(Connection connection, String userCode) {
+        String sql="select * from smbms_user where userCode=?";
+        Object pamars[]={userCode};
+        int num=0;
+        if(connection != null){
+            try {
+                rs = BaseDao.executQ(connection, pstm, rs, pamars, sql);
+                while (rs.next()){
+                    if(rs.getString("userCode").equals(userCode)){
+                        num++;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                BaseDao.closeResource(null,pstm,rs);
+            }
+        }
+        return num;
+    }
+
+    public int addUser(Connection connection, User user){
+        String sql="insert into smbms_user(userCode,userName,userPassword,gender,birthday,phone,address,userRole,createdBy,creationDate) values(?,?,?,?,?,?,?,?,?,?)";
+        int num=0;
+        if(connection != null){
+            List<Object> list = new ArrayList<Object>();
+            list.add(user.getUserCode());
+            list.add(user.getUserName());
+            list.add(user.getUserPassword());
+            list.add(user.getGender());
+            list.add(user.getBirthday());
+            list.add(user.getPhone());
+            list.add(user.getAddress());
+            list.add(user.getUserRole());
+            list.add(user.getCreatedBy());
+            list.add(user.getCreationDate());
+            //把集合变成数组
+            Object[] pamars = list.toArray();
+            try {
+                num = BaseDao.executU(connection, pstm, pamars, sql);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                BaseDao.closeResource(null,pstm,null);
+            }
+        }
+        return num;
     }
 }

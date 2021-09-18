@@ -7,6 +7,9 @@ import com.hl.pojo.User;
 import org.junit.Test;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
@@ -64,7 +67,6 @@ public class UserServiceImpl implements UserService {
         return userList;
     }
 
-
     public int getUserCount(String userName, int userRole) {
         Connection connection=null;
         int userCount=0;
@@ -77,6 +79,41 @@ public class UserServiceImpl implements UserService {
             BaseDao.closeResource(connection,null,null);
         }
         return userCount;
+    }
+
+    public int findUserbyUserCode(String userCode) {
+        Connection  connection=null;
+        int num=0;
+        try {
+            connection=BaseDao.getConnection();
+            num= userDao.findUserbyUserCode(connection, userCode);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            BaseDao.closeResource(connection,null,null);
+        }
+        return num;
+    }
+
+    public int addUser(User user) throws SQLException {
+        Connection connection=null;
+        int num=0;
+        try {
+            connection=BaseDao.getConnection();
+            //开始事务
+            connection.setAutoCommit(false);
+            num = userDao.addUser(connection, user);
+
+            //提交事务
+            connection.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            //业务回滚
+            connection.rollback();
+        }finally {
+            BaseDao.closeResource(connection,null,null);
+        }
+        return num;
     }
 
 }

@@ -8,7 +8,9 @@ var userRole = null;
 var addBtn = null;
 var backBtn = null;
 
-
+window.onload = function () {
+    console.log('load执行');
+};
 $(function(){
 	userCode = $("#userCode");
 	userName = $("#userName");
@@ -27,13 +29,14 @@ $(function(){
 	phone.next().html("*");
 	birthday.next().html("*");
 	userRole.next().html("*");
-	
+
 	$.ajax({
 		type:"get",//请求类型
-		url:path+"/user/getrolelist",//请求的url
+		url:path+"/sys/userDao.dao",//请求的url
 		data:{method:"getrolelist"},//请求参数
 		dataType:"json",//ajax接口（请求url）返回的数据类型
 		success:function(data){//data：返回数据（json对象）
+		    //alert(data)
 			if(data != null){
 				userRole.html("");
 				var options = "<option value=\"0\">请选择</option>";
@@ -49,9 +52,9 @@ $(function(){
 			validateTip(userRole.next(),{"color":"red"},imgNo+" 获取用户角色列表error",false);
 		}
 	});
-	
-	
-	
+
+
+
 	/*
 	 * 验证
 	 * 失焦\获焦
@@ -62,7 +65,7 @@ $(function(){
 		//user.do?method=ucexist&userCode=**
 		$.ajax({
 			type:"GET",//请求类型
-			url:path+"/user/ucexist",//请求的url
+			url:path+"/sys/userDao.dao",//请求的url
 			data:{method:"ucexist",userCode:userCode.val()},//请求参数
 			dataType:"json",//ajax接口（请求url）返回的数据类型
 			success:function(data){//data：返回数据（json对象）

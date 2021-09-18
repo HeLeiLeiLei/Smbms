@@ -17,9 +17,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
+
 
 public class UserServlet extends HttpServlet {
     @Override
@@ -30,6 +35,12 @@ public class UserServlet extends HttpServlet {
             this.pwdModify(req,resp);
         }else if(req.getParameter("method") != null &&req.getParameter("method").equals("query")){
             this.query(req,resp);
+        }else if(req.getParameter("method") != null && req.getParameter("method").equals("getrolelist")){
+            this.getRoleList(req,resp);
+        }else if(req.getParameter("method") != null && req.getParameter("method").equals("ucexist")){
+            this.getUserCode(req,resp);
+        }else if(req.getParameter("method") != null && req.getParameter("method").equals("add")){
+            this.addUser(req,resp);
         }
 
     }
@@ -150,8 +161,77 @@ public class UserServlet extends HttpServlet {
             req.setAttribute("totalPageCount",pageSupport.getTotalPageCount());
             req.getRequestDispatcher("/jsp/userlist.jsp").forward(req,resp);
         }
+    }
+
+    //获取用户权限信息
+    public void getRoleList(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        RoleService roleService=new RoleServiceImpl();
+        List<Role> roleList = roleService.getRoleList();
+        resp.setContentType("application/json");
+        PrintWriter writer = resp.getWriter();
+        writer.write(JSONArray.toJSONString(roleList));
+        writer.flush();
+        writer.close();
+    }
+
+    //验证用户编码
+    public void getUserCode(HttpServletRequest req, HttpServletResponse resp){
+        String userCode=req.getParameter("userCode");
+        if(userCode != null && userCode.length()>0){
+            UserService userService=new UserServiceImpl();
+            int num = userService.findUserbyUserCode(userCode);
+
+            resp.setContentType("application/json");
+            Map<String, String> hashMap = new HashMap<String, String>();
+            try {
+                PrintWriter writer = resp.getWriter();
+                if(num>0){
+                    hashMap.put("userCode","exist");
+                }
+                writer.write(JSONArray.toJSONString(hashMap));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    //添加用户
+    public void addUser(HttpServletRequest req, HttpServletResponse resp){
+        String userCode = req.getParameter("userCode");
+        String userName = req.getParameter("userName");
+        String userPassword = req.getParameter("userPassword");
+        int gender=Integer.parseInt(req.getParameter("gender"));
+        String birthday = req.getParameter("birthday");
+        String phone = req.getParameter("phone");
+        String address = req.getParameter("address");
+        int userRole = Integer.parseInt(req.getParameter("userRole"));
+
+        User user=new User();
+        user.setUserCode(userCode);
+        user.setUserName(userName);
+        user.setUserPassword(userPassword);
+        user.setGender(gender);
+        try{
+            user.setBirthday(new SimpleDateFormat("yyyy-MM-dd").parse(birthday));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        user.setPhone(phone);
+        user.setAddress(address);
+        user.setUserRole(userRole);
+        user.setCreatedBy(((User)req.getSession().getAttribute(Constants.USER_SESSION)).getId());
+        user.setCreationDate(new Date());
+        UserService userService=new UserServiceImpl();
+        try {
+            int i = userService.addUser(user);
+            if(i>0){
+                resp.sendRedirect(req.getContextPath()+"/sys/userDao.dao?method=query");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        //代参数跳转addlist页面
-
+    }
 }
