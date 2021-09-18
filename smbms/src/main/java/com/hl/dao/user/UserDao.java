@@ -27,4 +27,7 @@ public interface UserDao {
 
     //添加用户
     public int addUser(Connection connection,User user);
+
+    //删除用户
+    public int deleteUser(Connection connection,int userId);
 }

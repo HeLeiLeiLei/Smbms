@@ -119,6 +119,7 @@ public class UserDaoImpl implements UserDao{
                 rs = BaseDao.executQ(connection, pstm, rs, array, sql.toString());
                 while (rs.next()){
                     User user = new User();
+                    user.setId(rs.getInt("id"));
                     user.setUserCode(rs.getString("userCode"));
                     user.setUserName(rs.getString("userName"));
                     user.setGender(rs.getInt("gender"));
@@ -177,6 +178,22 @@ public class UserDaoImpl implements UserDao{
             //把集合变成数组
             Object[] pamars = list.toArray();
             try {
+                num = BaseDao.executU(connection, pstm, pamars, sql);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                BaseDao.closeResource(null,pstm,null);
+            }
+        }
+        return num;
+    }
+
+    public int deleteUser(Connection connection, int userId) {
+        int num=0;
+        if(connection != null){
+            String sql="delete from smbms_user where id=?";
+            Object pamars[]={userId};
+            try{
                 num = BaseDao.executU(connection, pstm, pamars, sql);
             } catch (Exception e) {
                 e.printStackTrace();

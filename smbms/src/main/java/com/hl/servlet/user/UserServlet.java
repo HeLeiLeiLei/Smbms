@@ -41,6 +41,8 @@ public class UserServlet extends HttpServlet {
             this.getUserCode(req,resp);
         }else if(req.getParameter("method") != null && req.getParameter("method").equals("add")){
             this.addUser(req,resp);
+        }else if(req.getParameter("method") != null && req.getParameter("method").equals("deleteUser")){
+            this.deleteUser(req,resp);
         }
 
     }
@@ -234,4 +236,29 @@ public class UserServlet extends HttpServlet {
         }
 
     }
+
+    //删除用户
+    public void deleteUser(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        int userid = Integer.parseInt(req.getParameter("uid"));
+        PrintWriter writer = resp.getWriter();
+        resp.setContentType("application/json");
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        if(userid > 0){
+            UserService userService=new UserServiceImpl();
+            try{
+                if(userService.deleteUser(userid) >0){
+                    hashMap.put("delResult","true");
+                }else {
+                    hashMap.put("delResult","false");
+                }
+                writer.write(JSONArray.toJSONString(hashMap));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }else {
+            hashMap.put("delResult","notexist");
+            writer.write(JSONArray.toJSONString(hashMap));
+        }
+    }
+
 }

@@ -1,11 +1,11 @@
-var userObj;
+﻿var userObj;
 
 //用户管理页面上点击删除按钮弹出删除框(userlist.jsp)
 function deleteUser(obj){
 	$.ajax({
 		type:"GET",
-		url:path+"/user/deluser",
-		data:{method:"deluser",uid:obj.attr("userid")},
+		url:path+"/sys/userDao.dao",
+		data:{method:"deleteUser",uid:obj.attr("userid")},
 		dataType:"json",
 		success:function(data){
 			if(data.delResult == "true"){//删除成功：移除删除行

@@ -4,6 +4,7 @@ import com.hl.dao.BaseDao;
 import com.hl.dao.user.UserDao;
 import com.hl.dao.user.UserDaoImpl;
 import com.hl.pojo.User;
+import com.hl.util.Constants;
 import org.junit.Test;
 
 import java.sql.Connection;
@@ -116,4 +117,22 @@ public class UserServiceImpl implements UserService {
         return num;
     }
 
+    public int deleteUser(int userId) throws SQLException {
+        Connection connection=null;
+        int num=0;
+        try {
+            connection=BaseDao.getConnection();
+            connection.setAutoCommit(false);
+            num=userDao.deleteUser(connection,userId);
+            connection.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            connection.rollback();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            BaseDao.closeResource(connection,null,null);
+        }
+        return num;
+    }
 }

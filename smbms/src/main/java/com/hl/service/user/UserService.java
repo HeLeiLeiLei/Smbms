@@ -23,4 +23,7 @@ public interface UserService {
 
     //添加用户
     public int addUser(User user) throws SQLException;
+
+    //删除用户
+    public int deleteUser(int userId) throws SQLException;
 }
