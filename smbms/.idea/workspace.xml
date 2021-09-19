@@ -45,7 +45,7 @@
         <item name="smbms@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="smbms: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="smbms_user: table" type="285a2a93:MysqlImplModel$Table" />
+        <item name="smbms_provider: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -97,6 +97,7 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\smbms\src\main\webapp\js" />
+      <recent name="E:\smbms\src\main\webapp\jsp" />
       <recent name="E:\smbms\src\main\java\com\hl\util" />
       <recent name="E:\smbms\src\main\webapp" />
       <recent name="E:\smbms\src\main\java\com\hl\pojo" />
@@ -115,6 +116,22 @@
     </option>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 9">
+    <configuration name="ProviderServiceImpl.Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="smbms" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.hl.service.provider.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.hl.service.provider" />
+      <option name="MAIN_CLASS_NAME" value="com.hl.service.provider.ProviderServiceImpl" />
+      <option name="METHOD_NAME" value="Test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RoleServiceImpl.Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="smbms" />
       <extension name="coverage">
@@ -158,22 +175,6 @@
       <option name="PACKAGE_NAME" value="com.hl.service.user" />
       <option name="MAIN_CLASS_NAME" value="com.hl.service.user.UserServiceImpl" />
       <option name="METHOD_NAME" value="Test" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserServiceImpl.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="smbms" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.hl.service.user.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.hl.service.user" />
-      <option name="MAIN_CLASS_NAME" value="com.hl.service.user.UserServiceImpl" />
-      <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -270,19 +271,19 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.UserServiceImpl.Test" />
-      <item itemvalue="JUnit.UserServiceImpl.test" />
       <item itemvalue="JUnit.UserServiceImpl.updateUserPassword" />
       <item itemvalue="JUnit.RoleServiceImpl.Test" />
       <item itemvalue="JUnit.RoleServiceImpl.test" />
       <item itemvalue="Tomcat Server.Tomcat 9" />
+      <item itemvalue="JUnit.ProviderServiceImpl.Test" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ProviderServiceImpl.Test" />
         <item itemvalue="JUnit.UserServiceImpl.Test" />
         <item itemvalue="JUnit.RoleServiceImpl.test" />
         <item itemvalue="JUnit.RoleServiceImpl.Test" />
         <item itemvalue="JUnit.UserServiceImpl.updateUserPassword" />
-        <item itemvalue="JUnit.UserServiceImpl.test" />
       </list>
     </recent_temporary>
   </component>
@@ -320,6 +321,7 @@
       <workItem from="1631940719554" duration="6392000" />
       <workItem from="1631949743375" duration="8758000" />
       <workItem from="1632010221895" duration="2487000" />
+      <workItem from="1632013266259" duration="25155000" />
     </task>
     <servers />
   </component>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/jsp/common/head.jsp"%>
+<%@include file="/jsp/common/head.jsp"%>
 
 <div class="right">
         <div class="location">
@@ -8,7 +8,7 @@
             <span>供应商管理页面</span>
         </div>
         <div class="search">
-        	<form method="get" action="${pageContext.request.contextPath }/jsp/provider.do">
+        	<form method="get" action="${pageContext.request.contextPath }/sys/Provider.dao?method=query">
 				<input name="method" value="query" type="hidden">
 				<span>供应商编码：</span>
 				<input name="queryProCode" type="text" value="${queryProCode }">
@@ -61,7 +61,14 @@
 				</tr>
 			</c:forEach>
         </table>
-
+	<div>
+		<p class="paging">
+			<a href="${pageContext.request.contextPath}/sys/Provider.dao?method=query&page=${pageBean.indexpage}">首页</a>
+			<a href="${pageContext.request.contextPath}/sys/Provider.dao?method=query&page=${pageBean.page-1}">    &lt; 上一页 </a>
+			<strong>第${pageBean.page}页/共${pageBean.Pagenumber}页</strong>
+			<a href="${pageContext.request.contextPath}/sys/Provider.dao?method=query&page=${pageBean.page+1}">下一页 &gt;</a>
+		</p>
+	</div>
     </div>
 </section>
 
@@ -78,5 +85,5 @@
    </div>
 </div>
 
-<%@include file="/WEB-INF/jsp/common/foot.jsp" %>
+<%@include file="/jsp/common/foot.jsp" %>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/providerlist.js"></script>

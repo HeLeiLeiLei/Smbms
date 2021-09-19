@@ -8,7 +8,8 @@ function jump_to(frm,num){
 	//验证用户的输入
 	var regexp=/^[1-9]\d*$/;
 	var totalPageCount = document.getElementById("totalPageCount").value;
-	//alert(totalPageCount);
+
+	alert(totalPageCount);
 	if(!regexp.test(num)){
 		alert("请输入大于0的正整数！");
 		return false;

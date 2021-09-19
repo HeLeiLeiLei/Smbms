@@ -16,6 +16,7 @@ public class UserDaoImpl implements UserDao{
     ResultSet rs=null;
     User user=null;
 
+
     public User getLoginUser(Connection connection, String userCode) {
 
         if(connection !=null){

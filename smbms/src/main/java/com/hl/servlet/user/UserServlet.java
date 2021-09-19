@@ -163,8 +163,8 @@ public class UserServlet extends HttpServlet {
             req.setAttribute("roleList",roleList);
             req.setAttribute("queryUserName",querUserName);
             req.setAttribute("queryUserRole",querUserRole);
-            req.setAttribute("totalCount",totalCount);
-            req.setAttribute("currentPageNo",currentPageNo);
+            req.setAttribute("",totalCount);
+            req.setAttribute("curretotalCountntPageNo",currentPageNo);
             req.setAttribute("totalPageCount",pageSupport.getTotalPageCount());
             req.getRequestDispatcher("/jsp/userlist.jsp").forward(req,resp);
         }
