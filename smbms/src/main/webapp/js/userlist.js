@@ -50,7 +50,7 @@ $(function(){
 	$(".viewUser").on("click",function(){
 		//将被绑定的元素（a）转换成jquery对象，可以使用jquery方法
 		var obj = $(this);
-		window.location.href=path+"/user/view?method=view&uid="+ obj.attr("usercode");
+		window.location.href=path+"/sys/userDao.dao?method=view&uid="+ obj.attr("usercode");
 	});
 	
 	$(".modifyUser").on("click",function(){

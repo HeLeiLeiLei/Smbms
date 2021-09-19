@@ -47,6 +47,8 @@ public class UserServlet extends HttpServlet {
             this.updateUser(req,resp);
         }else if(req.getParameter("method") != null && req.getParameter("method").equals("modify")){
             this.showUser(req,resp);
+        }else if(req.getParameter("method") != null && req.getParameter("method").equals("view")) {
+            this.showUser(req,resp);
         }
     }
 
@@ -306,14 +308,26 @@ public class UserServlet extends HttpServlet {
         if(userCode != null && userCode.length()>0){
             UserService userService=new UserServiceImpl();
             User user = userService.showUser(userCode);
-            try {
-                req.setAttribute("user",user);
-                req.getRequestDispatcher("/jsp/usermodify.jsp").forward(req,resp);
-            } catch (ServletException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if(req.getParameter("method") != null && req.getParameter("method").equals("modify")){
+                try {
+                    req.setAttribute("user",user);
+                    req.getRequestDispatcher("/jsp/usermodify.jsp").forward(req,resp);
+                } catch (ServletException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else if(req.getParameter("method") != null && req.getParameter("method").equals("view")) {
+                try {
+                    req.setAttribute("user",user);
+                    req.getRequestDispatcher("/jsp/userview.jsp").forward(req,resp);
+                } catch (ServletException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
+
     }
 }

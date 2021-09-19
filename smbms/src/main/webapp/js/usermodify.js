@@ -75,7 +75,8 @@ $(function(){
 	phone.on("focus",function(){
 		validateTip(phone.next(),{"color":"#666666"},"* 请输入手机号",false);
 	}).on("blur",function(){
-		var patrn=/^(13[0-9]|15[0-9]|18[0-9])\d{8}$/;
+		//var patrn=/^(13[0-9]|15[0-9]|18[0-9])\d{8}$/;
+		var patrn=/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
 		if(phone.val().match(patrn)){
 			validateTip(phone.next(),{"color":"green"},imgYes,true);
 		}else{

@@ -230,7 +230,7 @@ public class UserDaoImpl implements UserDao{
     }
 
     public User showUser(Connection connection,String userCode){
-        String sql="select * from smbms_user where userCode=?";
+        String sql="select u.*,r.roleName as userRoleName from smbms_user u,smbms_role r where u.userRole=r.id and u.userCode=?";
         Object pamars[]={userCode};
         User user=new User();
         if(connection != null){
@@ -238,12 +238,13 @@ public class UserDaoImpl implements UserDao{
                 rs = BaseDao.executQ(connection, pstm, rs, pamars, sql);
                 while (rs.next()){
                     user.setId(rs.getInt("id"));
+                    user.setUserCode(rs.getString("userCode"));
                     user.setUserName(rs.getString("userName"));
                     user.setGender(rs.getInt("gender"));
                     user.setBirthday(rs.getDate("birthday"));
                     user.setPhone(rs.getString("phone"));
                     user.setAddress(rs.getString("address"));
-                    user.setUserRole(rs.getInt("userRole"));
+                    user.setUserRoleName(rs.getString("userRoleName"));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
