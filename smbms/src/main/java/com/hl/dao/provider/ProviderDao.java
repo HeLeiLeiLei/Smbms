@@ -14,4 +14,13 @@ public interface ProviderDao {
                                           int pageSize);
     //查询供应商数量
     public int findProviderCount(Connection connection,String proCode,String proName);
+
+    //添加供应商
+    public int addPrvider(Connection connection,Provider provider);
+
+    //删除供应商
+    public int deleteProvider(Connection connection,int ProviderId);
+
+    //显示供应商详细信息
+    public Provider showProvider(Connection connection,int ProviderId);
 }

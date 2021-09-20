@@ -63,10 +63,10 @@
         </table>
 	<div>
 		<p class="paging">
-			<a href="${pageContext.request.contextPath}/sys/Provider.dao?method=query&page=${pageBean.indexpage}">首页</a>
-			<a href="${pageContext.request.contextPath}/sys/Provider.dao?method=query&page=${pageBean.page-1}">    &lt; 上一页 </a>
-			<strong>第${pageBean.page}页/共${pageBean.pagenumber}页</strong>
-			<a href="${pageContext.request.contextPath}/sys/Provider.dao?method=query&page=${pageBean.page+1}">下一页 &gt;</a>
+			<a href="${pageContext.request.contextPath}/sys/Provider.dao?method=query&page=${1}">首页</a>
+			<a href="${pageContext.request.contextPath}/sys/Provider.dao?method=query&page=${1}">    &lt; 上一页 </a>
+			<strong>第${1}页/共${1}页</strong>
+			<a href="${pageContext.request.contextPath}/sys/Provider.dao?method=query&page=${1}">下一页 &gt;</a>
 		</p>
 	</div>
     </div>

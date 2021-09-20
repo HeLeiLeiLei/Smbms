@@ -86,4 +86,75 @@ public class ProviderDaoImpl implements ProviderDao {
         }
         return count;
     }
+
+    public int addPrvider(Connection connection, Provider provider) {
+        int num=0;
+        if(connection != null){
+            String sql="insert into smbms_provider(proCode,proName,proContact,proPhone" +
+                    ",proAddress,proFax,proDesc,createdBy,creationDate) values(?,?,?,?,?,?,?,?,?)";
+            List<Object> arrayList = new ArrayList<Object>();
+            arrayList.add(provider.getProCode());
+            arrayList.add(provider.getProName());
+            arrayList.add(provider.getProContact());
+            arrayList.add(provider.getProPhone());
+            arrayList.add(provider.getProAddress());
+            arrayList.add(provider.getProFax());
+            arrayList.add(provider.getProDesc());
+            arrayList.add(provider.getCreatedBy());
+            arrayList.add(provider.getCreationDate());
+
+            Object prmars[] = arrayList.toArray();
+            try{
+                num= BaseDao.executU(connection,pstm,prmars,sql);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                BaseDao.closeResource(null,pstm,null);
+            }
+        }
+        return num;
+    }
+
+    public int deleteProvider(Connection connection, int ProviderId) {
+        int num=0;
+        if(connection != null){
+            String sql="delete from smbms_provider where id=?";
+            Object prmars[]={ProviderId};
+            try {
+                num = BaseDao.executU(connection, pstm, prmars, sql);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                BaseDao.closeResource(null,pstm,null);
+            }
+        }
+        return num;
+    }
+
+    public Provider showProvider(Connection connection, int ProviderId) {
+        Provider provider=new Provider();
+        if(connection != null){
+            try {
+                String sql="select * from smbms_provider where id=?";
+                Object prmars[]={ProviderId};
+                rs = BaseDao.executQ(connection, pstm, rs, prmars, sql);
+                while (rs.next()){
+                    provider.setProCode(rs.getString("proCode"));
+                    provider.setProName(rs.getString("proName"));
+                    provider.setProContact(rs.getString("proContact"));
+                    provider.setProPhone(rs.getString("proPhone"));
+                    provider.setProAddress(rs.getString("proAddress"));
+                    provider.setProFax(rs.getString("proFax"));
+                    provider.setProDesc(rs.getString("proDesc"));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                BaseDao.closeResource(null,pstm,rs);
+            }
+        }
+        return provider;
+    }
+
+
 }
