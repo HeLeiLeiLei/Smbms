@@ -139,6 +139,7 @@ public class ProviderDaoImpl implements ProviderDao {
                 Object prmars[]={ProviderId};
                 rs = BaseDao.executQ(connection, pstm, rs, prmars, sql);
                 while (rs.next()){
+                    provider.setId(rs.getInt("id"));
                     provider.setProCode(rs.getString("proCode"));
                     provider.setProName(rs.getString("proName"));
                     provider.setProContact(rs.getString("proContact"));
@@ -154,6 +155,35 @@ public class ProviderDaoImpl implements ProviderDao {
             }
         }
         return provider;
+    }
+
+    public int updateProvider(Connection connection, Provider provider) {
+        int num=0;
+        if(connection != null){
+            String sql="update smbms_provider set proCode=?,proName=?,proContact=?," +
+                    "proPhone=?,proAddress=?,proFax=?,proDesc=?,modifyBy=?,modifyDate=? where id=?";
+            ArrayList<Object> arrayList = new ArrayList<Object>();
+            arrayList.add(provider.getProCode());
+            arrayList.add(provider.getProName());
+            arrayList.add(provider.getProContact());
+            arrayList.add(provider.getProPhone());
+            arrayList.add(provider.getProAddress());
+            arrayList.add(provider.getProFax());
+            arrayList.add(provider.getProDesc());
+            arrayList.add(provider.getModifyBy());
+            arrayList.add(provider.getModifyDate());
+            arrayList.add(provider.getId());
+            Object[] array = arrayList.toArray();
+            try {
+                num = BaseDao.executU(connection, pstm, array, sql);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                BaseDao.closeResource(null,pstm,null);
+            }
+
+        }
+        return num;
     }
 
 

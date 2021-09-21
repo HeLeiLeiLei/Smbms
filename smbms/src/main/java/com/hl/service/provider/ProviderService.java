@@ -20,4 +20,7 @@ public interface ProviderService {
 
     //显示供应商信息
     public Provider showProvide(int providerId) throws SQLException;
+
+    //修改供应商信息
+    public int updateProvider(Provider provider) throws SQLException;
 }

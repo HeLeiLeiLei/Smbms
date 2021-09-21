@@ -23,4 +23,7 @@ public interface ProviderDao {
 
     //显示供应商详细信息
     public Provider showProvider(Connection connection,int ProviderId);
+
+    //修改用户信息
+    public int updateProvider(Connection connection,Provider provider);
 }

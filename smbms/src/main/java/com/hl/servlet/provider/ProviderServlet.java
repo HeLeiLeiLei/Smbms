@@ -35,6 +35,10 @@ public class ProviderServlet extends HttpServlet {
             this.deleteProvider(req, resp);
         } else if (req.getParameter("method") != null && req.getParameter("method").equals("modify")) {
             this.shouProvider(req,resp);
+        }else if(req.getParameter("method") != null && req.getParameter("method").equals("updateProvider")){
+            this.updateProvider(req,resp);
+        }else if(req.getParameter("method") != null && req.getParameter("method").equals("view")){
+            this.shouProvider(req,resp);
         }
 
     }
@@ -138,13 +142,61 @@ public class ProviderServlet extends HttpServlet {
 
     //显示供应商信息
     public void shouProvider(HttpServletRequest req, HttpServletResponse resp){
-        System.out.println("进入到shouProvider");
-        try {
-            req.getRequestDispatcher("/jsp/providermodify.jsp").forward(req,resp);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        String providerId=req.getParameter("proid");
+        if(providerId != null && providerId.length()>0){
+            try {
+                ProviderService providerService=new ProviderServiceImpl();
+                Provider provider = providerService.showProvide(Integer.parseInt(providerId));
+                if(req.getParameter("method").equals("modify")){
+                    req.setAttribute("provider",provider);
+                    req.getRequestDispatcher("/jsp/providermodify.jsp").forward(req,resp);
+                }else if (req.getParameter("method").equals("view")){
+                    req.setAttribute("provider",provider);
+                    req.getRequestDispatcher("/jsp/providerview.jsp").forward(req,resp);
+                }
+            } catch (ServletException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    //修改供应商信息
+    public void updateProvider(HttpServletRequest req, HttpServletResponse resp){
+        String uid = req.getParameter("uid");
+        String proCode = req.getParameter("proCode");
+        String proName = req.getParameter("proName");
+        String proContact = req.getParameter("proContact");
+        String proPhone = req.getParameter("proPhone");
+        String proAddress = req.getParameter("proAddress");
+        String proFax = req.getParameter("proFax");
+        String proDesc = req.getParameter("proDesc");
+        if(uid != null && uid.length()>0){
+            Provider provider=new Provider();
+            provider.setId(Integer.parseInt(uid));
+            provider.setProCode(proCode);
+            provider.setProName(proName);
+            provider.setProContact(proContact);
+            provider.setProPhone(proPhone);
+            provider.setProAddress(proAddress);
+            provider.setProFax(proFax);
+            provider.setProDesc(proDesc);
+            provider.setModifyBy(((User)req.getSession().getAttribute(Constants.USER_SESSION)).getId());
+            provider.setModifyDate(new Date());
+            ProviderService providerService=new ProviderServiceImpl();
+            try {
+                int i=providerService.updateProvider(provider);
+                if(i>0){
+                    resp.sendRedirect(req.getContextPath()+"/sys/Provider.dao?method=query");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

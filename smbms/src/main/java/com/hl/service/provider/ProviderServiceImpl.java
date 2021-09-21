@@ -95,16 +95,22 @@ public class ProviderServiceImpl implements ProviderService{
         return provider;
     }
 
-    @Test
-    public void Test(){
-        ProviderServiceImpl providerService=new ProviderServiceImpl();
-        try{
-            Provider provider = providerService.showProvide(2);
-            if(provider != null){
-                System.out.println("succes");
-            }
-        } catch (SQLException e) {
+    public int updateProvider(Provider provider) throws SQLException {
+        Connection connection=null;
+        int num=0;
+        try {
+            connection=BaseDao.getConnection();
+            connection.setAutoCommit(false);
+            num=providerDao.updateProvider(connection,provider);
+            connection.commit();
+        } catch (Exception e) {
             e.printStackTrace();
+            connection.rollback();
+        }finally {
+            BaseDao.closeResource(connection,null,null);
         }
+        return num;
     }
+
+
 }
