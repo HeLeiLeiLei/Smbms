@@ -50,6 +50,14 @@
     </expand>
     <select />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Jsp File" />
+      </list>
+    </option>
+  </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -218,6 +226,8 @@
       <updated>1632140735750</updated>
       <workItem from="1632140738447" duration="8709000" />
       <workItem from="1632195081109" duration="4783000" />
+      <workItem from="1632211925518" duration="4066000" />
+      <workItem from="1632300714837" duration="5735000" />
     </task>
     <servers />
   </component>

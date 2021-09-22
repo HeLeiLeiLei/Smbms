@@ -70,12 +70,17 @@
 					</tr>
 				</c:forEach>
 			</table>
-			<input type="hidden" id="totalPageCount" value="${totalPageCount}"/>
-		  	<c:import url="rollpage.jsp">
-	          	<c:param name="totalCount" value="${totalCount}"/>
-	          	<c:param name="currentPageNo" value="${currentPageNo}"/>
-	          	<c:param name="totalPageCount" value="${totalPageCount}"/>
-          	</c:import>
+			<div>
+				<a href="${pageContext.request.contextPath }/sys/userDao.dao?method=query&currentPage=${page.indexPage}">首页</a>
+				<a href="${pageContext.request.contextPath }/sys/userDao.dao?method=query&currentPage=${page.currentPage+1}" >下一页</a>
+				<a href="${pageContext.request.contextPath }/sys/userDao.dao?method=query&currentPage=${page.currentPage-1}" >上一页</a>
+				<a href="${pageContext.request.contextPath }/sys/userDao.dao?method=query&currentPage=${page.lastPage}" >尾页</a>
+
+				<a>    当前为第: ${page.currentPage} 页    </a>
+				<a>    共 ${page.pageNum} 页    </a>
+				<a>    共 ${page.totalNum} 条    </a>
+
+			</div>
         </div>
     </section>
 

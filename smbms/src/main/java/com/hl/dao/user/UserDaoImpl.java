@@ -111,7 +111,6 @@ public class UserDaoImpl implements UserDao{
                 list.add(userRole);
             }
             sql.append(" order by id asc  limit ?,?");
-            currentPageNo=(currentPageNo-1)*pageSize;
             list.add(currentPageNo);
             list.add(pageSize);
 

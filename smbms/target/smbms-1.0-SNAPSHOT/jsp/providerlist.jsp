@@ -61,14 +61,18 @@
 				</tr>
 			</c:forEach>
         </table>
-	<div>
-		<p class="paging">
-			<a href="${pageContext.request.contextPath}/sys/Provider.dao?method=query&page=${1}">首页</a>
-			<a href="${pageContext.request.contextPath}/sys/Provider.dao?method=query&page=${1}">    &lt; 上一页 </a>
-			<strong>第${1}页/共${1}页</strong>
-			<a href="${pageContext.request.contextPath}/sys/Provider.dao?method=query&page=${1}">下一页 &gt;</a>
-		</p>
-	</div>
+
+    <div>
+        <a href="${pageContext.request.contextPath }/sys/Provider.dao?method=query&currentPage=${page.indexPage}">首页</a>
+        <a href="${pageContext.request.contextPath }/sys/Provider.dao?method=query&currentPage=${page.currentPage+1}" >下一页</a>
+        <a href="${pageContext.request.contextPath }/sys/Provider.dao?method=query&currentPage=${page.currentPage-1}" >上一页</a>
+        <a href="${pageContext.request.contextPath }/sys/Provider.dao?method=query&currentPage=${page.lastPage}" >尾页</a>
+
+        <a>    当前为第: ${page.currentPage} 页    </a>
+        <a>    共 ${page.pageNum} 页    </a>
+        <a>    共 ${page.totalNum} 条    </a>
+
+    </div>
     </div>
 </section>
 

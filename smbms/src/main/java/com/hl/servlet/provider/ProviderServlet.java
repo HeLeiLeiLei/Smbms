@@ -6,10 +6,9 @@ import com.hl.pojo.User;
 import com.hl.service.provider.ProviderService;
 import com.hl.service.provider.ProviderServiceImpl;
 import com.hl.util.Constants;
-import com.hl.util.PageSupport;
-import com.hl.util.PageUtils;
+import com.hl.util.Page;
 
-import javax.management.StringValueExp;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +18,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -52,24 +52,29 @@ public class ProviderServlet extends HttpServlet {
 
     //获取所有供应商的信息
     public void getProviderList(HttpServletRequest req, HttpServletResponse resp){
-
+        int currentPage=1;
+        int pageSize=5;
         //获取前端传过来的参数
         String queryProCode = req.getParameter("queryProCode");
         String queryProName=req.getParameter("queryProName");
-        String pageIndex=req.getParameter("page");
-
-        int currentPage=0;
-        int pageSize=5;
-        //通过findProviderCount()方法获取总数 并且设置分页中的数据
+        String cruPage=req.getParameter("currentPage");
         ProviderService providerService =new ProviderServiceImpl();
         int totalCount = providerService.findProviderCount(queryProCode, queryProName);
+        Page page=new Page(currentPage,pageSize,totalCount);
+
+        if(cruPage != null && cruPage.length()>0){
+            int cruPage2 = Integer.parseInt(cruPage);
+            page.setCurrentPage(cruPage2);
+            page.setStart(cruPage2);
+        }
+
         //执行获取供应商的所有数据
         try{
-            List<Provider> providerList = providerService.getProviderList(queryProCode, queryProName,currentPage, pageSize);
+            List<Provider> providerList = providerService.getProviderList(queryProCode, queryProName, page.getStart(), page.getPageSize());
             req.setAttribute("queryProCode",queryProCode);
             req.setAttribute("queryProName",queryProName);
             req.setAttribute("providerList",providerList);
-
+            req.setAttribute("page",page);
             req.getRequestDispatcher("/jsp/providerlist.jsp").forward(req,resp);
         } catch (ServletException e) {
             e.printStackTrace();
