@@ -49,7 +49,6 @@ public class Page {
         if(currentPage <= 0){
             this.currentPage = 1;
         }else if(currentPage >= pageNum){
-            System.out.println(pageNum);
             this.currentPage = pageNum;
         }else {
             this.currentPage=currentPage;

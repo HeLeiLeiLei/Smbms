@@ -8,7 +8,7 @@
            <span>订单管理页面</span>
        </div>
        <div class="search">
-       <form method="get" action="${pageContext.request.contextPath }/jsp/bill.do">
+       <form method="get" action="${pageContext.request.contextPath }/sys/Bill.dao?method=query">
 			<input name="method" value="query" class="input-text" type="hidden">
 			<span>商品名称：</span>
 			<input name="queryProductName" type="text" value="${queryProductName }">
@@ -79,6 +79,14 @@
 				</tr>
 			</c:forEach>
       </table>
+	<a href="${pageContext.request.contextPath }/sys/Bill.dao?method=query&currentPage=${page.indexPage}">首页</a>
+	<a href="${pageContext.request.contextPath }/sys/Bill.dao?method=query&currentPage=${page.currentPage+1}" >下一页</a>
+	<a href="${pageContext.request.contextPath }/sys/Bill.dao?method=query&currentPage=${page.currentPage-1}" >上一页</a>
+	<a href="${pageContext.request.contextPath }/sys/Bill.dao?method=query&currentPage=${page.lastPage}" >尾页</a>
+
+	<a>    当前为第 ${page.currentPage} 页    </a>
+	<a>    共 ${page.pageNum} 页    </a>
+	<a>    共 ${page.totalNum} 条    </a>
   </div>
 </section>
 

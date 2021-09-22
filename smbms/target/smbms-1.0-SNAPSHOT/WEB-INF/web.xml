@@ -70,7 +70,7 @@
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/sys/userDao.dao</url-pattern>
     </servlet-mapping>
-    <!--配置User的servlet-->
+    <!--配置>Provider的servlet-->
     <servlet>
         <servlet-name>ProviderServlet</servlet-name>
         <servlet-class>com.hl.servlet.provider.ProviderServlet</servlet-class>
@@ -79,6 +79,14 @@
         <servlet-name>ProviderServlet</servlet-name>
         <url-pattern>/sys/Provider.dao</url-pattern>
     </servlet-mapping>
-
+    <!--配置>Provider的servlet-->
+    <servlet>
+        <servlet-name>BillServlet</servlet-name>
+        <servlet-class>com.hl.servlet.Bill.BillServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BillServlet</servlet-name>
+        <url-pattern>/sys/Bill.dao</url-pattern>
+    </servlet-mapping>
 
 </web-app>

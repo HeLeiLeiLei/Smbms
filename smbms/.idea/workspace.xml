@@ -45,7 +45,7 @@
         <item name="smbms@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="smbms: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="smbms_provider: table" type="285a2a93:MysqlImplModel$Table" />
+        <item name="smbms_bill: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -53,8 +53,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -84,6 +84,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="configurable.group.build.tools" />
   </component>
   <component name="RecentsManager">
@@ -105,6 +106,22 @@
     </option>
   </component>
   <component name="RunManager" selected="Tomcat Server.tomcat 9">
+    <configuration name="BillServiceImpl.Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="smbms" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.hl.service.bill.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.hl.service.bill" />
+      <option name="MAIN_CLASS_NAME" value="com.hl.service.bill.BillServiceImpl" />
+      <option name="METHOD_NAME" value="Test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ProviderServiceImpl.Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="smbms" />
       <extension name="coverage">
@@ -197,9 +214,11 @@
     <list>
       <item itemvalue="JUnit.ProviderServiceImpl.Test" />
       <item itemvalue="Tomcat Server.tomcat 9" />
+      <item itemvalue="JUnit.BillServiceImpl.Test" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.BillServiceImpl.Test" />
         <item itemvalue="JUnit.ProviderServiceImpl.Test" />
       </list>
     </recent_temporary>
@@ -227,7 +246,7 @@
       <workItem from="1632140738447" duration="8709000" />
       <workItem from="1632195081109" duration="4783000" />
       <workItem from="1632211925518" duration="4066000" />
-      <workItem from="1632300714837" duration="5735000" />
+      <workItem from="1632300714837" duration="15864000" />
     </task>
     <servers />
   </component>
