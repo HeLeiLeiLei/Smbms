@@ -15,5 +15,11 @@ public interface BillDao {
     public List<Provider> getProviderList(Connection connection);
 
     //获取所有订单数量
-    public int getBillCount(Connection connection);
+    public int getBillCount(Connection connection,
+                            String queryProductName,
+                            int queryProviderId,
+                            int queryIsPayment);
+
+    //添加订单
+    public int addBill(Connection connection,Bill bill);
 }

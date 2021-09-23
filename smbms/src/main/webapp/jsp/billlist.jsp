@@ -79,14 +79,15 @@
 				</tr>
 			</c:forEach>
       </table>
-	<a href="${pageContext.request.contextPath }/sys/Bill.dao?method=query&currentPage=${page.indexPage}">首页</a>
-	<a href="${pageContext.request.contextPath }/sys/Bill.dao?method=query&currentPage=${page.currentPage+1}" >下一页</a>
-	<a href="${pageContext.request.contextPath }/sys/Bill.dao?method=query&currentPage=${page.currentPage-1}" >上一页</a>
-	<a href="${pageContext.request.contextPath }/sys/Bill.dao?method=query&currentPage=${page.lastPage}" >尾页</a>
 
-	<a>    当前为第 ${page.currentPage} 页    </a>
-	<a>    共 ${page.pageNum} 页    </a>
-	<a>    共 ${page.totalNum} 条    </a>
+	<span><a href="${pageContext.request.contextPath }/sys/Bill.dao?method=query&currentPage=${page.indexPage}">首页</a></span>
+	<span><a href="${pageContext.request.contextPath }/sys/Bill.dao?method=query&currentPage=${page.currentPage+1}" >下一页</a></span>
+	<span><a href="${pageContext.request.contextPath }/sys/Bill.dao?method=query&currentPage=${page.currentPage-1}" >上一页</a></span>
+	<span><a href="${pageContext.request.contextPath }/sys/Bill.dao?method=query&currentPage=${page.lastPage}" >尾页</a></span>
+	<span>    当前为第 ${page.currentPage} 页    </span>
+	<span>    共 ${page.pageNum} 页    </span>
+	<span>    共 ${page.totalNum} 条    </span>
+
   </div>
 </section>
 

@@ -30,7 +30,7 @@ public class BillDaoImpl implements BillDao {
                 list.add("%"+queryProductName+"%");
             }
             if(queryProviderId>0){
-                sql.append(" and p.providerId=?");
+                sql.append(" and b.providerId=?");
                 list.add(queryProviderId);
             }
             if(isPayment>0){
@@ -44,7 +44,6 @@ public class BillDaoImpl implements BillDao {
             //将list转换为数组
             Object[] array = list.toArray();
             try {
-                System.out.println("BillDaoImpl："+sql.toString());
                 rs = BaseDao.executQ(connection,pstm,rs,array,sql.toString());
                 while (rs.next()){
                     Bill bill=new Bill();
@@ -86,12 +85,30 @@ public class BillDaoImpl implements BillDao {
         return list;
     }
 
-    public int getBillCount(Connection connection) {
+    public int getBillCount(Connection connection,
+                            String queryProductName,
+                            int queryProviderId,
+                            int queryIsPayment) {
         int count=0;
         if(connection != null){
-            String sql="select count(1) as count from smbms_bill";
+            StringBuffer sql=new StringBuffer();
+            sql.append("select count(1) as count from smbms_bill where 1=1");
+            ArrayList<Object> list = new ArrayList<Object>();
+            if(queryProductName != null && queryProductName.length()>0){
+                sql.append(" and productName like ?");
+                list.add("%"+queryProductName+"%");
+            }
+            if(queryProviderId > 0){
+                sql.append(" and providerId=?");
+                list.add(queryProviderId);
+            }
+            if(queryIsPayment > 0 ){
+                sql.append(" and isPayment=?");
+                list.add(queryIsPayment);
+            }
+            Object[] array = list.toArray();
             try {
-                rs=BaseDao.executQ(connection,pstm,rs,null,sql);
+                rs=BaseDao.executQ(connection,pstm,rs,array,sql.toString());
                 while (rs.next()){
                     count=rs.getInt("count");
                 }
@@ -102,5 +119,36 @@ public class BillDaoImpl implements BillDao {
             }
         }
         return count;
+    }
+
+    public int addBill(Connection connection, Bill bill) {
+        int num=0;
+        if(connection != null){
+            String sql="insert into smbms_bill(billCode,productName," +
+                    "productUnit,productCount,totalPrice,providerId,isPayment,createdBy,creationDate)" +
+                    " values(?,?,?,?,?,?,?,?,?)";
+            List list=new ArrayList();
+            list.add(bill.getBillCode());
+            list.add(bill.getProductName());
+            list.add(bill.getProductUnit());
+            list.add(bill.getProductCount());
+            list.add(bill.getTotalPrice());
+            list.add(bill.getProviderId());
+            list.add(bill.getIsPayment());
+            list.add(bill.getCreatedBy());
+            list.add(bill.getCreationDate());
+
+            Object parms[] = list.toArray();
+            try {
+                num = BaseDao.executU(connection, pstm, parms, sql);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                BaseDao.closeResource(null,pstm,null);
+            }
+
+
+        }
+        return num;
     }
 }

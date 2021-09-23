@@ -8,6 +8,7 @@ import com.hl.pojo.Provider;
 import org.junit.Test;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 public class BillServiceImpl implements BillService {
@@ -45,12 +46,14 @@ public class BillServiceImpl implements BillService {
         return providerList;
     }
 
-    public int getBillCount() {
+    public int getBillCount(String queryProductName,
+                            int queryProviderId,
+                            int queryIsPayment) {
         int count=0;
         Connection connection=null;
         try {
             connection=BaseDao.getConnection();
-            count=billDao.getBillCount(connection);
+            count=billDao.getBillCount(connection,queryProductName,queryProviderId,queryIsPayment);
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
@@ -59,11 +62,18 @@ public class BillServiceImpl implements BillService {
         return count;
     }
 
-    @Test
-    public void Test(){
-        BillServiceImpl billService=new BillServiceImpl();
-        int billCount = billService.getBillCount();
-        System.out.println(billCount);
+    public int addBill(Bill bill) throws SQLException {
+        Connection connection=null;
+        int num=0;
+        try {
+            connection=BaseDao.getConnection();
+            connection.setAutoCommit(false);
+            num = billDao.addBill(connection, bill);
+            connection.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            connection.rollback();
+        }
+        return num;
     }
-
 }
