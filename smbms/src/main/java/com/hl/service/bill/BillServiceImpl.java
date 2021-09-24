@@ -76,4 +76,50 @@ public class BillServiceImpl implements BillService {
         }
         return num;
     }
+
+    public Bill showBill(int billId) {
+        Connection connection=null;
+        Bill bill=null;
+        try {
+            connection=BaseDao.getConnection();
+            bill=billDao.showBill(connection,billId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            BaseDao.closeResource(connection,null,null);
+        }
+        return bill;
+    }
+
+    public int updateBill(Bill bill) throws SQLException {
+        Connection connection=null;
+        int i=0;
+        try {
+            connection=BaseDao.getConnection();
+            connection.setAutoCommit(false);
+            i=billDao.updateBill(connection,bill);
+            connection.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            connection.rollback();
+        }finally {
+            BaseDao.closeResource(connection,null,null);
+        }
+        return i;
+    }
+
+    public int deleteBill(int billId) throws SQLException {
+        Connection connection=null;
+        int num=0;
+        try {
+            connection=BaseDao.getConnection();
+            connection.setAutoCommit(false);
+            num = billDao.deleteBill(connection, billId);
+            connection.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            connection.rollback();
+        }
+        return num;
+    }
 }

@@ -1,10 +1,10 @@
-var billObj;
+﻿var billObj;
 
 //订单管理页面上点击删除按钮弹出删除框(billlist.jsp)
 function deleteBill(obj){
 	$.ajax({
 		type:"GET",
-		url:path+"/jsp/bill.do",
+		url:path+"/sys/Bill.dao",
 		data:{method:"delbill",billid:obj.attr("billid")},
 		dataType:"json",
 		success:function(data){
@@ -43,12 +43,12 @@ $(function(){
 	$(".viewBill").on("click",function(){
 		//将被绑定的元素（a）转换成jquery对象，可以使用jquery方法
 		var obj = $(this);
-		window.location.href=path+"/jsp/bill.do?method=view&billid="+ obj.attr("billid");
+		window.location.href=path+"/sys/Bill.dao?method=view&billid="+ obj.attr("billid");
 	});
 	
 	$(".modifyBill").on("click",function(){
 		var obj = $(this);
-		window.location.href=path+"/jsp/bill.do?method=modify&billid="+ obj.attr("billid");
+		window.location.href=path+"/sys/Bill.dao?method=modify&billid="+ obj.attr("billid");
 	});
 	$('#no').click(function () {
 		cancleBtn();

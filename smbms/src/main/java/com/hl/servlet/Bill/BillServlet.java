@@ -18,8 +18,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class BillServlet extends HttpServlet {
@@ -33,6 +33,14 @@ public class BillServlet extends HttpServlet {
             this.getProvidList(req,resp);
         }else if(value != null && value.equals("add")){
             this.addBill(req,resp);
+        }else if(value != null && value.equals("view")){
+            this.showBill(req,resp);
+        }else if(value != null && value.equals("modify")){
+            this.showBill(req,resp);
+        }else if(value != null && value.equals("modifysave")){
+            this.updateBill(req,resp);
+        }else if (value != null && value.equals("delbill")){
+            this.deleteBill(req,resp);
         }
 
     }
@@ -127,11 +135,112 @@ public class BillServlet extends HttpServlet {
         try {
             int i = billService.addBill(bill);
             if(i>0){
-                System.out.println("进入到if");
                 resp.sendRedirect(req.getContextPath()+"/sys/Bill.dao?method=query");
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void showBill(HttpServletRequest req, HttpServletResponse resp){
+        String method = req.getParameter("method");
+        if(method !=null && method.equals("view")){
+            String billid = req.getParameter("billid");
+            if(billid != null && billid.length()>0){
+                BillService billService=new BillServiceImpl();
+                Bill bill = billService.showBill(Integer.parseInt(billid));
+                try {
+                    req.setAttribute("bill",bill);
+                    req.getRequestDispatcher("/jsp/billview.jsp").forward(req,resp);
+                } catch (ServletException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }else if(method != null && method.equals("modify")){
+            String billid = req.getParameter("billid");
+            if(billid != null && billid.length()>0){
+                BillService billService=new BillServiceImpl();
+                Bill bill = billService.showBill(Integer.parseInt(billid));
+                try {
+                    req.setAttribute("bill",bill);
+                    req.getRequestDispatcher("/jsp/billmodify.jsp").forward(req,resp);
+                } catch (ServletException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    public void updateBill(HttpServletRequest req, HttpServletResponse resp){
+        String billId = req.getParameter("id");
+        String billCode = req.getParameter("billCode");
+        String productName = req.getParameter("productName");
+        String productUnit = req.getParameter("productUnit");
+        String productCount = req.getParameter("productCount");
+        String totalPrice = req.getParameter("totalPrice");
+        String providerId = req.getParameter("providerId");
+        String isPayment = req.getParameter("isPayment");
+        Bill bill=new Bill();
+        if(billId != null && billId.length()>0){
+            bill.setId(Integer.parseInt(billId));
+            bill.setBillCode(billCode);
+            bill.setProductName(productName);
+            bill.setProductUnit(productUnit);
+            bill.setProductCount(new BigDecimal(productCount));
+            bill.setTotalPrice(new BigDecimal(totalPrice));
+            bill.setProviderId(Integer.parseInt(providerId));
+            bill.setIsPayment(Integer.parseInt(isPayment));
+            bill.setModifyBy(((User)req.getSession().getAttribute(Constants.USER_SESSION)).getId());
+            bill.setModifyDate(new Date());
+
+            BillService billService=new BillServiceImpl();
+            try {
+                int i = billService.updateBill(bill);
+                if(i>0){
+                    resp.sendRedirect(req.getContextPath()+"/sys/Bill.dao?method=query");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public void deleteBill(HttpServletRequest req, HttpServletResponse resp){
+        String billId = req.getParameter("billid");
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        if(billId != null && billId.length()>0){
+            BillService billService=new BillServiceImpl();
+
+            try {
+                int i = billService.deleteBill(Integer.parseInt(billId));
+                if(i>0){
+                    hashMap.put("delResult","true");
+                }else {
+                    hashMap.put("delResult","false");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }else {
+            hashMap.put("delResult","notexist");
+        }
+        try {
+            PrintWriter writer = resp.getWriter();
+            resp.setContentType("application/json");
+            writer.write(JSONArray.toJSONString(hashMap));
+            writer.flush();
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

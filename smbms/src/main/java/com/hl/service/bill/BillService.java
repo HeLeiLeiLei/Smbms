@@ -23,6 +23,15 @@ public interface BillService {
                             int queryProviderId,
                             int queryIsPayment);
 
-    //添加用户
+    //添加订单
     public int addBill(Bill bill) throws SQLException;
+
+    //显示订单数据
+    public Bill showBill(int billId);
+
+    //修改订单数据
+    public int updateBill(Bill bill) throws SQLException;
+
+    //删除订单
+    public int deleteBill(int billId) throws SQLException;
 }

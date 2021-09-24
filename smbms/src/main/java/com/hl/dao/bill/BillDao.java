@@ -22,4 +22,15 @@ public interface BillDao {
 
     //添加订单
     public int addBill(Connection connection,Bill bill);
+
+    //显示订单信息
+    public Bill showBill(Connection connection,int BillId);
+
+    //修改订单信息
+    public int updateBill(Connection connection,Bill bill);
+
+    //删除订单
+    public int deleteBill(Connection connection,int BillId);
+
+
 }

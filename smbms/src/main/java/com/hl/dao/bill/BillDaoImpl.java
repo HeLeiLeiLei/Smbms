@@ -23,7 +23,7 @@ public class BillDaoImpl implements BillDao {
         List<Bill> billList=new ArrayList<Bill>();
         if(connection != null){
             List list=new ArrayList();
-            sql.append("select b.billCode,b.productName,p.proName,b.totalPrice,b.isPayment,b.creationDate\n" +
+            sql.append("select b.billCode,b.id,b.productName,p.proName,b.totalPrice,b.isPayment,b.creationDate\n" +
                     "from smbms_bill b,smbms_provider p where b.providerid=p.id");
             if(queryProductName != null && queryProductName.length()>0){
                 sql.append(" and productName like ?");
@@ -47,6 +47,7 @@ public class BillDaoImpl implements BillDao {
                 rs = BaseDao.executQ(connection,pstm,rs,array,sql.toString());
                 while (rs.next()){
                     Bill bill=new Bill();
+                    bill.setId(rs.getInt("id"));
                     bill.setBillCode(rs.getString("billCode"));
                     bill.setProductName(rs.getString("productName"));
                     bill.setProviderName(rs.getString("proName"));
@@ -148,6 +149,78 @@ public class BillDaoImpl implements BillDao {
             }
 
 
+        }
+        return num;
+    }
+
+    public Bill showBill(Connection connection, int BillId) {
+
+        Bill bill=new Bill();
+        if(connection != null){
+            String sql="select p.proName,b.* from smbms_provider p,smbms_bill b where b.providerid=p.id and b.id=?;";
+            Object parms[]={BillId};
+            try {
+                rs = BaseDao.executQ(connection, pstm, rs, parms, sql);
+                while (rs.next()){
+                    bill.setId(rs.getInt("id"));
+                    bill.setBillCode(rs.getString("billCode"));
+                    bill.setProductName(rs.getString("productName"));
+                    bill.setProductUnit(rs.getString("productUnit"));
+                    bill.setProductCount(rs.getBigDecimal("productCount"));
+                    bill.setTotalPrice(rs.getBigDecimal("totalPrice"));
+                    bill.setProviderName(rs.getString("proName"));
+                    bill.setIsPayment(rs.getInt("isPayment"));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                BaseDao.closeResource(null,pstm,rs);
+            }
+        }
+
+        return bill;
+    }
+
+    public int updateBill(Connection connection, Bill bill) {
+        int i=0;
+        if(connection != null){
+            String sql="update smbms_bill set billCode=?,productName=?" +
+                    ",productUnit=?,productCount=?,totalPrice=?,providerId=?,isPayment=?,modifyBy=?,modifyDate=? where id=?";
+            ArrayList<Object> arrayList = new ArrayList<Object>();
+            arrayList.add(bill.getBillCode());
+            arrayList.add(bill.getProductName());
+            arrayList.add(bill.getProductUnit());
+            arrayList.add(bill.getProductCount());
+            arrayList.add(bill.getTotalPrice());
+            arrayList.add(bill.getProviderId());
+            arrayList.add(bill.getIsPayment());
+            arrayList.add(bill.getModifyBy());
+            arrayList.add(bill.getModifyDate());
+            arrayList.add(bill.getId());
+            Object[] array = arrayList.toArray();
+            try {
+                i=BaseDao.executU(connection,pstm,array,sql);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                BaseDao.closeResource(null,pstm,null);
+            }
+        }
+        return i;
+    }
+
+    public int deleteBill(Connection connection, int BillId) {
+        int num=0;
+        if(connection != null){
+            String sql="delete from smbms_bill where id=?";
+            Object prams[]={BillId};
+            try {
+                num = BaseDao.executU(connection, pstm, prams, sql);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                BaseDao.closeResource(null,pstm,null);
+            }
         }
         return num;
     }
